@@ -1,0 +1,1 @@
+export { i18nProvider } from './i18n-provider'

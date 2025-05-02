@@ -6,8 +6,13 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb',
+    'plugin:@typescript-eslint/recommended',
   ],
+  parser: '@typescript-eslint/parser',  
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   overrides: [
   ],
   parserOptions: {
@@ -16,9 +21,12 @@ module.exports = {
   },
   plugins: [
     'react',
+    '@typescript-eslint',
   ],
   rules: {
     'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
     camelcase: 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };

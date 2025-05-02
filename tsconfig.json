@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "@services/*": ["./services/*"],
+      "@assets/*": ["./assets/*"],
+      "@templates/*": ["./components/templates/*"],
+      "@presentation/*": ["./presentation/*"],
+      "@components/*": ["./presentation/components/*"],
+      "@domain/*": ["./domain/*"],
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
