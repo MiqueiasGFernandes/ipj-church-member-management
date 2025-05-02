@@ -1,2 +1,3 @@
-export type { MemberDto } from './member.dto'
-export type { AddressDto } from './address.dto'
+export * from './member.dto'
+export * from './address.dto'
+export * from './metrics.dto'
