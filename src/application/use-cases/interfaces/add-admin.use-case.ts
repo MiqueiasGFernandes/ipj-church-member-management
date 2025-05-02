@@ -1,5 +1,5 @@
 import { UserDto } from "@application/dto/user.dto";
 
-export interface IAddUserUseCase {
+export interface IAddAdminUseCase {
   add(user: UserDto): Promise<UserDto>
 }
