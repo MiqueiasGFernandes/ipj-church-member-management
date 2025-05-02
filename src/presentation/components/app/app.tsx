@@ -14,11 +14,11 @@ import { Dashboard } from '@components/pages';
 import { CreateMember, EditMember, ListMembers, ShowMember } from '@components/templates';
 import { RemoteAuthProvider } from '@services/auth-provider';
 import { RemoteStorageDataProvider } from '@services/data-provider';
-import resources from '../../config/resources';
 import { customTheme } from '../../config/theme';
 import Authentication from '../pages/login/authentication';
 import ListRequests from '../templates/requests/list';
 import ShowRequest from '../templates/requests/show';
+import { resources } from '@presentation/config';
 
 function App() {
   return (

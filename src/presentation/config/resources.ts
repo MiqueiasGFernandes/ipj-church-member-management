@@ -1,4 +1,4 @@
-const resources = {
+export const resources = {
   members: {
     name: 'members',
     label: 'Membros',
@@ -12,5 +12,3 @@ const resources = {
     label: 'Cadastre-se como Membro',
   },
 };
-
-export default resources;
