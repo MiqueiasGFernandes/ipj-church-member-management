@@ -1,4 +1,5 @@
 export class MemberDto {
+  id?: string
   /**
    * Nome
    */

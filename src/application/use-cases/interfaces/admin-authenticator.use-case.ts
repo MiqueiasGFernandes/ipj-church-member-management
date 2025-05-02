@@ -1,3 +1,3 @@
 export interface IAdminAuthenticateUseCase {
-  login(username: string, password: string): Promise<void>
+  execute(username: string, password: string): Promise<void>
 }

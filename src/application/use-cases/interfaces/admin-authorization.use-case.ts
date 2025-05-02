@@ -1,3 +1,3 @@
 export interface IAdminGetPermissionsUseCase {
-  getPermissions(): Promise<string>
+  execute(): Promise<string>
 }

@@ -1,3 +1,3 @@
 export interface IAdminSignoutUseCase {
-  logout(): Promise<void>
+  execute(): Promise<void>
 }
