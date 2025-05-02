@@ -3,7 +3,7 @@ import { Link, TextInput } from 'react-admin';
 
 
 import { styled } from '@mui/material/styles';
-import { UserDto } from '@presentation/dto/user.dto';
+import { UserDto } from '@application/dto/user.dto';
 import { RemoteAuthProvider } from '@services/auth-provider';
 import {
   Form,

@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { SectionTitle } from '@presentation/components/molecules';
 import academicLevels from '@presentation/constants/academic-levels';
 import brazilianStates from '@presentation/constants/brazilian-states';
-import { AddressDto } from '@presentation/dto';
+import { AddressDto } from '@application/dto';
 import { RemoteAddressProvider } from '@services/address-provider';
 import { useState } from 'react';
 import {

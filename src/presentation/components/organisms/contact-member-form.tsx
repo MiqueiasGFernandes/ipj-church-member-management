@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import { required, SelectInput, TextInput } from "react-admin";
 import { SectionTitle } from "../molecules";
 import { RemoteAddressProvider } from "@services/address-provider";
-import { AddressDto } from "@presentation/dto";
+import { AddressDto } from "@application/dto";
 import brazilianStates from "@presentation/constants/brazilian-states";
 
 export function ContactMemberForm() {

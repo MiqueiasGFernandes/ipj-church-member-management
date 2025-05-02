@@ -24,6 +24,7 @@
       "@presentation/*": ["./presentation/*"],
       "@components/*": ["./presentation/components/*"],
       "@domain/*": ["./domain/*"],
+      "@application/*": ["./application/*"],
     }
   },
   "include": ["src", "vite.config.ts"],

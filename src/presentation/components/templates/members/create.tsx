@@ -13,7 +13,7 @@ import {
   MemberPersonalInformationForm,
   ProfessionalMemberInformationForm
 } from '@presentation/components/organisms';
-import { MemberDto } from '@presentation/dto';
+import { MemberDto } from '@application/dto';
 
 function convertStringToBooleans(record: MemberDto) {
   return {

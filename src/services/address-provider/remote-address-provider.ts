@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AddressProvider } from './address-provider';
-import { AddressDto } from '@presentation/dto';
+import { AddressDto } from '@application/dto';
 
 export class RemoteAddressProvider implements AddressProvider {
   async getOne(cep: string): Promise<AddressDto> {

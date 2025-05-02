@@ -1,4 +1,4 @@
-import { DashboardMetrics } from "@presentation/dto";
+import { DashboardMetrics } from "@application/dto";
 
 export interface DashboardProvider {
   fetchMetrics(): Promise<DashboardMetrics>
