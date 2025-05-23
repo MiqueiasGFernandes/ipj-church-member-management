@@ -9,7 +9,7 @@ import {
 import type { UserDto } from "@application/dto";
 import { inject, injectable } from "tsyringe";
 import type { IAuthErrorMapper } from "@application/mappers";
-import { InfraTokenEnum } from "infra/di";
+import { InfraTokenEnum } from "../../infra/di";
 
 const UserDtoSchema = z.object({
   id: z.string(),
