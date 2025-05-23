@@ -2,6 +2,6 @@ export class UserDto {
   id?: string
   name: string
   email: string
-  password: string
-  passwordConfirmation: string
+  password?: string
+  passwordConfirmation?: string
 }
