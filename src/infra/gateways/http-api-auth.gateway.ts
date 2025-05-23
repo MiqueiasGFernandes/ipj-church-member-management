@@ -11,16 +11,22 @@ import { inject, injectable } from "tsyringe";
 import type { IAuthErrorMapper } from "@application/mappers";
 import { InfraTokenEnum } from "infra/di";
 
+const UserDtoSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+});
+
 const AuthResponseSchema = z.object({
   access_token: z.string(),
 });
 
-export type HttpApiContractResponse = {
-  message: string,
-  errors?: Record<string, string[]>,
-  user?: UserDto,
-}
+const RegisterResponseSchema = z.object({
+  message: z.string(),
+  user: UserDtoSchema.optional(),
+});
 
+export type HttpApiContractResponse = z.infer<typeof RegisterResponseSchema>;
 
 @injectable()
 export class HttpApiAuthGateway implements IAuthGateway {
@@ -36,21 +42,34 @@ export class HttpApiAuthGateway implements IAuthGateway {
     try {
       const url = `${process.env.REACT_APP_LOGIN_URL}/register`;
 
-      const { data } = await axios.post<HttpApiContractResponse>(url, {
+      const { data } = await axios.post(url, {
         name: userDto.name,
         email: userDto.email,
         password: userDto.password,
       });
 
+      const parsed = RegisterResponseSchema.safeParse(data);
+
+      if (!parsed.success) {
+        const message = this.formatZodErrors(parsed.error.issues);
+        return {
+          success: false,
+          error: {
+            code: AuthErrorCodeEnum.INVALID_SERVER_RESPONSE,
+            message: `Resposta inválida da API: ${message}`,
+          },
+        };
+      }
+
       return {
         success: true,
-        user: data.user,
+        user: parsed.data.user,
       };
     } catch (error) {
-      const parsedError = error as AxiosError<HttpApiContractResponse>
+      const parsedError = error as AxiosError<HttpApiContractResponse>;
       return this.authErrorMapper.transformToRegisterError({
-        message: parsedError.response?.data.message || "",
-        status: parsedError.status || 500,
+        message: parsedError.response?.data?.message || "",
+        status: parsedError.response?.status || 500,
       });
     }
   }
@@ -68,7 +87,6 @@ export class HttpApiAuthGateway implements IAuthGateway {
 
       if (!parsed.success) {
         const message = this.formatZodErrors(parsed.error.issues);
-
         return {
           isAuth: false,
           error: {
@@ -83,10 +101,10 @@ export class HttpApiAuthGateway implements IAuthGateway {
         token: parsed.data.access_token,
       };
     } catch (error) {
-      const parsedError = error as AxiosError<HttpApiContractResponse>
+      const parsedError = error as AxiosError<HttpApiContractResponse>;
       return this.authErrorMapper.transformToAuthError({
-        message: parsedError.response?.data.message || "Usuário ou senha incorretos",
-        status: parsedError.status || 401,
+        message: parsedError.response?.data?.message || "Usuário ou senha incorretos",
+        status: parsedError.response?.status || 401,
       });
     }
   }
