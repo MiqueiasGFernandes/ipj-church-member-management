@@ -1,13 +1,7 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "always"
-    },
-    "editor.formatOnSave": false,
-    "eslint.validate": [
-        "javascript",
-        "typescript",
-        "typescriptreact"
-    ],
-    "editor.tabSize": 2,
-    "files.eol": "\n"
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  }
 }
