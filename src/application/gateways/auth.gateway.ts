@@ -4,6 +4,7 @@ export enum AuthErrorCodeEnum {
   TO_MANY_REQUESTS = 'TO_MANY_REQUESTS',
   AUTH_FAILED = 'AUTH_FAILED',
   INVALID_SERVER_RESPONSE = 'INVALID_SERVER_RESPONSE',
+  INPUT_VALIDATION = 'INPUT_VALIDATION',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
 }
 
@@ -16,7 +17,16 @@ export type AuthResponse = {
   }
 }
 
+export type RegisterResponse = {
+  success: boolean,
+  user?: UserDto
+  error?: {
+    code: AuthErrorCodeEnum,
+    message: string
+  }
+}
+
 export interface IAuthGateway {
-  register(userDto: UserDto): Promise<UserDto>
+  register(userDto: UserDto): Promise<RegisterResponse>
   auth(username: string, password: string): Promise<AuthResponse>
 }

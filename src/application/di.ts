@@ -3,13 +3,13 @@ import { container } from "tsyringe";
 import { AddAdmin } from "./use-cases";
 
 export const ApplicationTokenEnum = {
-    AddAdminUseCase: "AddAdminUseCase"
-}
+    AddAdminUseCase: "AddAdminUseCase",
+};
 
 export class ApplicationDiContainer {
     inject(): void {
         container
-            .register<IAddAdminUseCase>("AddAdminUseCase", {
+            .register<IAddAdminUseCase>(ApplicationTokenEnum.AddAdminUseCase, {
                 useClass: AddAdmin,
             })
     }
