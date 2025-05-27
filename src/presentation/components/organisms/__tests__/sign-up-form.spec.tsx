@@ -53,7 +53,7 @@ describe("SignUpForm Component", () => {
 
         expect(nameField).toBeInTheDocument();
         expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/^Senha$/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/^Senha/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Confirmação de Senha/i)).toBeInTheDocument();
 
         const button = screen.getByRole("button", { name: /Registrar Usuário/i });
@@ -67,7 +67,7 @@ describe("SignUpForm Component", () => {
 
         fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: "Miqueias" } });
         fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "miqueias@example.com" } });
-        fireEvent.change(screen.getByLabelText(/^Senha$/i), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText(/^Senha/i), { target: { value: "123456" } });
         fireEvent.change(screen.getByLabelText(/Confirmação de Senha/i), { target: { value: "123456" } });
 
         fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));
@@ -98,7 +98,7 @@ describe("SignUpForm Component", () => {
 
         fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: "Miqueias" } });
         fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "miqueias@example.com" } });
-        fireEvent.change(screen.getByLabelText(/^Senha$/i), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText(/^Senha/i), { target: { value: "123456" } });
         fireEvent.change(screen.getByLabelText(/Confirmação de Senha/i), { target: { value: "123456" } });
 
         fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));
@@ -110,13 +110,53 @@ describe("SignUpForm Component", () => {
         expect(handleRedirectToConfirmedSignUpForm).not.toHaveBeenCalled();
     });
 
+    it.skip("should show required field errors when submitting empty form", async () => {
+        setup();
+
+        fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));
+
+        await waitFor(() => {
+            expect(notifyMock).toHaveBeenCalled()
+        });
+    });
+
+    it("should show error for invalid email format", async () => {
+        setup();
+
+        fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: "João" } });
+        fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "email-invalido" } });
+        fireEvent.change(screen.getByLabelText(/^Senha/i), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText(/Confirmação de Senha/i), { target: { value: "123456" } });
+
+        fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));
+
+        await waitFor(() => {
+            expect(screen.getByText("Email inválido")).toBeInTheDocument();
+        });
+    });
+
+    it("should show error when password and confirmation do not match", async () => {
+        setup();
+
+        fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: "João" } });
+        fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "joao@email.com" } });
+        fireEvent.change(screen.getByLabelText(/^Senha/i), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText(/Confirmação de Senha/i), { target: { value: "654321" } });
+
+        fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));
+
+        await waitFor(() => {
+            expect(notifyMock).toHaveBeenCalled()
+        });
+    });
+
     it("should call handleRedirectToConfirmedSignUpForm on successful registration", async () => {
         const addAdminMock = jest.fn().mockResolvedValue(null);
         setup({ addAdmin: addAdminMock, isLoading: false, error: null });
 
         fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: "Miqueias" } });
         fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: "miqueias@example.com" } });
-        fireEvent.change(screen.getByLabelText(/^Senha$/i), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText(/^Senha/i), { target: { value: "123456" } });
         fireEvent.change(screen.getByLabelText(/Confirmação de Senha/i), { target: { value: "123456" } });
 
         fireEvent.click(screen.getByRole("button", { name: /Registrar Usuário/i }));

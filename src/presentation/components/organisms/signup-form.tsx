@@ -1,5 +1,5 @@
 import { Button, CardContent, CircularProgress } from "@mui/material";
-import { Link, TextInput } from "react-admin";
+import { Link, TextInput, required, email, minLength } from "react-admin";
 
 import type { UserDto } from "@application/dto";
 import { styled } from "@mui/material/styles";
@@ -33,42 +33,76 @@ const StyledForm = styled(Form, {
 type SignUpFormOptions = {
   handleRedirectToConfirmedSignUpForm: () => void;
   handleRedirectToLoginForm: () => void;
-}
+};
 
 export function SignUpForm({
   handleRedirectToConfirmedSignUpForm,
   handleRedirectToLoginForm,
 }: SignUpFormOptions) {
   const notify = useNotify();
-
-  const { addAdmin, error, isLoading } = useAddAdmin()
+  const { addAdmin, error, isLoading } = useAddAdmin();
 
   const submit = async (values: UserDto) => {
-    await addAdmin(values);
-
-    if (error) {
-      notify(error, { type: 'error' })
+    if (Object.values(values).length === 0) {
+      notify("Preencha os campos antes de continuar", { type: "error" })
       return;
     }
 
-    handleRedirectToConfirmedSignUpForm()
+    if (values.password !== values.passwordConfirmation) {
+      notify("Preencha os campos antes de continuar", { type: "error" })
+      return;
+    }
+
+    await addAdmin(values);
+
+    if (error) {
+      notify(error, { type: "error" });
+      return;
+    }
+
+    handleRedirectToConfirmedSignUpForm();
   };
 
   return (
     <StyledForm
       mode="onChange"
-      noValidate
       onSubmit={(data) => submit(data as UserDto)}
     >
       <CardContent className={LoginFormClasses.content}>
-        <TextInput label="Nome" source="name" fullWidth />
-        <TextInput label="Email" source="email" fullWidth />
-        <TextInput type="password" label="Senha" source="password" fullWidth />
+        <TextInput
+          label="Nome"
+          source="name"
+          fullWidth
+          validate={required("Nome é obrigatório")}
+        />
+        <TextInput
+          label="Email"
+          source="email"
+          fullWidth
+          validate={[
+            required("Email é obrigatório"),
+            email("Email inválido"),
+          ]}
+        />
+        <TextInput
+          type="password"
+          label="Senha"
+          source="password"
+          fullWidth
+          validate={[
+            required("Senha é obrigatória"),
+            minLength(6, "Senha deve ter ao menos 6 caracteres"),
+          ]}
+        />
         <TextInput
           type="password"
           label="Confirmação de Senha"
           source="passwordConfirmation"
           fullWidth
+          validate={[
+            required("Confirmação de senha é obrigatória"),
+            minLength(6, "Confirmação de senha deve ter ao menos 6 caracteres"),
+          ]}
         />
         <Button
           variant="contained"
