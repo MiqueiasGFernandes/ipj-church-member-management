@@ -1,10 +1,10 @@
 import { Button, CardContent, CircularProgress } from "@mui/material";
 import { Link, TextInput } from "react-admin";
 
-import { styled } from "@mui/material/styles";
 import type { UserDto } from "@application/dto";
-import { Form, useNotify, useSafeSetState } from "ra-core";
+import { styled } from "@mui/material/styles";
 import { useAddAdmin } from "@presentation/hooks";
+import { Form, useNotify } from "ra-core";
 
 const PREFIX = "RaSignUpForm";
 

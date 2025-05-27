@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,18 +19,37 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "@services/*": ["./services/*"],
-      "@assets/*": ["./assets/*"],
-      "@templates/*": ["./components/templates/*"],
-      "@presentation/*": ["./presentation/*"],
-      "@components/*": ["./presentation/components/*"],
-      "@domain/*": ["./domain/*"],
-      "@application/*": ["./application/*"],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@templates/*": [
+        "./components/templates/*"
+      ],
+      "@presentation/*": [
+        "./presentation/*"
+      ],
+      "@components/*": [
+        "./presentation/components/*"
+      ],
+      "@domain/*": [
+        "./domain/*"
+      ],
+      "@application/*": [
+        "./application/*"
+      ],
     }
   },
-  "include": ["src", "vite.config.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
