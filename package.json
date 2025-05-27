@@ -33,7 +33,7 @@
     "lint": "eslint ./src/**/*.{js|jsx}",
     "lint:fix": "biome check . --apply",
     "test": "jest",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "browserslist": {
     "production": [
