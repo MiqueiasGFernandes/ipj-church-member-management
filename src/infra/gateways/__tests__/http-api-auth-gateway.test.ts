@@ -1,4 +1,4 @@
-import "reflect-metadata"
+
 import { HttpApiAuthGateway } from "../http-api-auth.gateway";
 import axios from "axios";
 import { AuthErrorCodeEnum } from "@application/gateways";
