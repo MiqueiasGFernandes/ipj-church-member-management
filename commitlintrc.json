@@ -1,0 +1,15 @@
+{
+    "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore"
+    ],
+    "maxHeaderLength": 100,
+    "subjectPattern": "^[a-z].*",
+    "subjectPatternErrorMsg": "A mensagem deve começar com letra minúscula"
+}

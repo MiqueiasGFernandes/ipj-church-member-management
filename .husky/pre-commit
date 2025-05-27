@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+npx git-commit-msg-linter
+npm run lint:fix
+npm run test
